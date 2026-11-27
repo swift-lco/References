@@ -5,6 +5,26 @@ public extension ReferenceProviding {
     var citationKey: StructuredContent.CitationKey {
         .init(rawValue: public_name_or_id)
     }
+
+    /// This reference cited inline, for prose:
+    /// `"…\(Cynology.References.ader2019.citation(at: .page("12")))"`.
+    func citation(
+        at locators: ReferenceLocator...
+    ) -> StructuredContent.Inline {
+        .citation(
+            key: citationKey,
+            locators: locators
+        )
+    }
+}
+
+public extension ReferenceGroup {
+    /// Every reference of the group cited at this point, in order.
+    var citations: InlineText {
+        InlineText(
+            references.map { $0.citation() }
+        )
+    }
 }
 
 public extension InlineText.StringInterpolation {
