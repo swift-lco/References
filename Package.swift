@@ -18,12 +18,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-lco/Primitives.git", branch: "master"),
+        .package(url: "https://github.com/swift-dsl/DSL.git", branch: "master"),
     ],
     targets: [
         .target(
             name: "References",
             dependencies: [
                 .product(name: "Primitives", package: "Primitives"),
+                .product(name: "DSL", package: "DSL"),
             ]
         ),
     ],
